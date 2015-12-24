@@ -1,0 +1,38 @@
+/* 
+  Localizable.strings
+  CopyCatSwift
+
+  Created by Baiqi Zhang on 12/23/15.
+  Copyright © 2015 Baiqi Zhang. All rights reserved.
+*/
+
+"Font" = "Georgia-Bold";
+"Font2" = "System";
+"FontSizeS" = "13";
+"FontSpacing" = "2";
+
+"CAMERA" = "CAMERA";
+"GALLERY" = "GALLERY";
+
+"CATEGORY" = "CATEGORY";
+"PEOPLE" = "PEOPLE";
+"URBAN" = "URBAN";
+"NATURE" = "NATURE";
+"FOOD" = "FOOD";
+"LIFESTYLE" = "LIFESTYLE";
+"MISCELLEANOUS" = "MISCELLEANOUS";
+
+"GALLERY" = "GALLERY";
+
+"SETTINGS" = "SETTINGS";
+"SEND FEEDBACK" = "SEND FEEDBACK";
+"RATE THE APP" = "RATE THE APP";
+"The developer values your feedback." = "The developer values your feedback.";
+"OVERLAY MODE: BACKGROUND" = "OVERLAY MODE: BACKGROUND";
+"OVERLAY MODE: HOVER" = "OVERLAY MODE: HOVER";
+"AUTOSAVE TO CAMERA ROLL: ON" = "AUTOSAVE TO CAMERA ROLL: ON";
+"AUTOSAVE TO CAMERA ROLL: OFF" = "AUTOSAVE TO CAMERA ROLL: OFF";
+"PREVIEW AFTER PHOTO TAKEN: ON" = "PREVIEW AFTER PHOTO TAKEN: ON";
+"PREVIEW AFTER PHOTO TAKEN: OFF" = "PREVIEW AFTER PHOTO TAKEN: OFF";
+
+"Photo saved" = "Saved to camera roll";

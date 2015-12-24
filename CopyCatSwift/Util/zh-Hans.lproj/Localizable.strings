@@ -1,0 +1,36 @@
+/* 
+  Localizable.strings
+  CopyCatSwift
+
+  Created by Baiqi Zhang on 12/23/15.
+  Copyright © 2015 Baiqi Zhang. All rights reserved.
+*/
+
+"Font" = "STHeitiSC-Medium";
+"FontSizeS" = "14";
+"FontSpacing" = "3";
+
+
+"CAMERA" = "拍 照";
+"GALLERY" = "相 册";
+
+"CATEGORY" = "类 别";
+"PEOPLE" = "人 物";
+"URBAN" = "城 市";
+"NATURE" = "风 景";
+"FOOD" = "食 物";
+"LIFESTYLE" = "生 活";
+"MISCELLEANOUS" = "其 它";
+
+"SETTINGS" = "设 置";
+"SEND FEEDBACK" = "提交反馈";
+"RATE THE APP" = "给应用打分";
+"The developer values your feedback." = "感谢您的反馈！";
+"OVERLAY MODE: BACKGROUND" = "叠加模式：透明背景";
+"OVERLAY MODE: HOVER" = "叠加模式：悬浮";
+"AUTOSAVE TO CAMERA ROLL: ON" = "自动保存到系统相册: ON";
+"AUTOSAVE TO CAMERA ROLL: OFF" = "自动保存到系统相册: OFF";
+"PREVIEW AFTER PHOTO TAKEN: ON" = "拍照后预览: ON";
+"PREVIEW AFTER PHOTO TAKEN: OFF" = "拍照后预览: OFF";
+
+"Photo saved" = "已保存到系统相册";
