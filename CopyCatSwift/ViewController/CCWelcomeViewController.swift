@@ -11,16 +11,29 @@ import UIKit
 
 
 class CCWelcomeViewController: UIViewController {
-    var backgroundImageView = UIImageView()
-    var placeHolderImageView = UIImageView()
-    var categoryButton = UIButton()
-    var inspireButton = UIButton()
-    var settingsButton = UIButton()
+    private var backgroundImageView = UIImageView()
+    private var placeHolderImageView = UIImageView()
+    private var categoryButton = UIButton()
+    private var inspireButton = UIButton()
+    private var settingsButton = UIButton()
 
     func openGallery(){
-        let controller = CCCategoryViewController()//categories: self.categories)
-        controller.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+        let controller = CCCategoryViewController()
+        controller.modalTransitionStyle = .CrossDissolve
         self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    func openSettings() {
+        let vc = CCSettingsViewController()
+        vc.modalTransitionStyle = .CrossDissolve
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    func openProfile() {
+        let list = CCCoreUtil.categories
+        let vc = CCProfileViewController(category: list[0] as! CCCategory)
+        vc.modalTransitionStyle = .CrossDissolve
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -29,7 +42,6 @@ class CCWelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         //Init offset and ImageView
         var offset : CGFloat = 0.0
@@ -55,7 +67,7 @@ class CCWelcomeViewController: UIViewController {
         inspireButton.frame = CGRectMake(self.view.frame.size.width - 115, 340 - offset, 50, 50)
         inspireButton.setBackgroundImage(UIImage(named: "gallery.png"), forState: .Normal)
         inspireButton.setBackgroundImage(UIImage(named: "gallery_highlight.png"), forState: .Highlighted)
-        inspireButton.addTarget(self, action: "openPhoto", forControlEvents: .TouchUpInside)
+        inspireButton.addTarget(self, action: "openProfile", forControlEvents: .TouchUpInside)
         self.view!.addSubview(inspireButton)
 
         //Placeholder for Fading
@@ -67,9 +79,7 @@ class CCWelcomeViewController: UIViewController {
         }
         self.view!.addSubview(self.placeHolderImageView)
 
-        //Creating entries
-        CCCoreUtil.addCategory("People")
-        
+        //Button Labels
         let cameraLabel: UILabel = UILabel(frame: CGRectMake(75, 393 - offset, 60, 15))
         cameraLabel.textAlignment = .Center
         cameraLabel.text = NSLocalizedString("CAMERA", comment: "CAMERA")
@@ -83,11 +93,11 @@ class CCWelcomeViewController: UIViewController {
         self.view!.addSubview(libraryLabel)
         
         //Settings
-        self.settingsButton = UIButton(frame: CGRectMake(0, 0, 40, 40))
-        self.settingsButton.setBackgroundImage(UIImage(named: "settings2.png"), forState: .Normal)
-        self.settingsButton.setBackgroundImage(UIImage(named: "settings2_highlight.png"), forState: .Highlighted)
-        self.settingsButton.addTarget(self, action: "openSettings", forControlEvents: .TouchUpInside)
-        self.view!.addSubview(self.settingsButton)
+        settingsButton = UIButton(frame: CGRectMake(0, 0, 40, 40))
+        settingsButton.setBackgroundImage(UIImage(named: "settings2.png"), forState: .Normal)
+        settingsButton.setBackgroundImage(UIImage(named: "settings2_highlight.png"), forState: .Highlighted)
+        settingsButton.addTarget(self, action: "openSettings", forControlEvents: .TouchUpInside)
+        view!.addSubview(self.settingsButton)
     }
 
     override func didReceiveMemoryWarning() {

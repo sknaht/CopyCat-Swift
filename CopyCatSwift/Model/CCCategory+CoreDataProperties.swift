@@ -2,7 +2,7 @@
 //  CCCategory+CoreDataProperties.swift
 //  CopyCatSwift
 //
-//  Created by Baiqi Zhang on 12/22/15.
+//  Created by Baiqi Zhang on 12/29/15.
 //  Copyright © 2015 Baiqi Zhang. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,8 +15,9 @@ import CoreData
 extension CCCategory {
 
     @NSManaged var bannerURI: String?
+    @NSManaged var id: NSNumber?
     @NSManaged var name: String?
     @NSManaged var photoCount: NSNumber?
-    @NSManaged var photoList: NSSet?
+    @NSManaged var photoList: NSOrderedSet?
 
 }

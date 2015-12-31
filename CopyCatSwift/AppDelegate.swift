@@ -13,16 +13,18 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var rootViewController = CCWelcomeViewController()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        //init point
+        //Start VC
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window?.rootViewController = self.rootViewController;
+        self.window?.rootViewController = CCWelcomeViewController()
         self.window?.makeKeyAndVisible()
-
+        
+        //init core
+        CCCoreUtil.prepare()
+        
         //apparances
-        CCFramedButton.appearance().titleLabel?.font = UIFont.systemFontOfSize(CCCoreUtil.fontSizeS)
+//        CCFramedButton.appearance().titleLabel?.font! = UIFont.systemFontOfSize(CCCoreUtil.fontSizeS)
         CCFramedButton.appearance().backgroundColor = UIColor(white: 0, alpha: 0.5)
         UILabel.appearance().textColor = UIColor.whiteColor()
         UILabel.appearance().textAlignment = .Center

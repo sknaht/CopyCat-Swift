@@ -2,7 +2,7 @@
 //  CCUser+CoreDataProperties.swift
 //  CopyCatSwift
 //
-//  Created by Baiqi Zhang on 12/22/15.
+//  Created by Baiqi Zhang on 12/29/15.
 //  Copyright © 2015 Baiqi Zhang. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,5 +14,7 @@ import CoreData
 
 extension CCUser {
 
+    @NSManaged var name: String?
+    @NSManaged var token: String?
 
 }
