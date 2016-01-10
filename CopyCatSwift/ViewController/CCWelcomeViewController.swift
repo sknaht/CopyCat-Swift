@@ -23,15 +23,14 @@ class CCWelcomeViewController: UIViewController {
         self.presentViewController(controller, animated: true, completion: nil)
     }
     
-    func openSettings() {
-        let vc = CCSettingsViewController()
+    func openProfile() {
+        let vc = CCProfileViewController()
         vc.modalTransitionStyle = .CrossDissolve
         self.presentViewController(vc, animated: true, completion: nil)
     }
-    
-    func openProfile() {
-        let list = CCCoreUtil.categories
-        let vc = CCProfileViewController(category: list[0] as! CCCategory)
+
+    func openInspire() {
+        let vc = CCInspireViewController()
         vc.modalTransitionStyle = .CrossDissolve
         self.presentViewController(vc, animated: true, completion: nil)
     }
@@ -67,17 +66,8 @@ class CCWelcomeViewController: UIViewController {
         inspireButton.frame = CGRectMake(self.view.frame.size.width - 115, 340 - offset, 50, 50)
         inspireButton.setBackgroundImage(UIImage(named: "gallery.png"), forState: .Normal)
         inspireButton.setBackgroundImage(UIImage(named: "gallery_highlight.png"), forState: .Highlighted)
-        inspireButton.addTarget(self, action: "openProfile", forControlEvents: .TouchUpInside)
+        inspireButton.addTarget(self, action: "openInspire", forControlEvents: .TouchUpInside)
         self.view!.addSubview(inspireButton)
-
-        //Placeholder for Fading
-        self.placeHolderImageView.frame = self.view.frame
-        if self.view.frame.size.height == 568 {
-            self.placeHolderImageView.image = UIImage(named: "LaunchImage_2x.png")
-        } else {
-            self.placeHolderImageView.image = UIImage(named: "LaunchImage_1x.png")
-        }
-        self.view!.addSubview(self.placeHolderImageView)
 
         //Button Labels
         let cameraLabel: UILabel = UILabel(frame: CGRectMake(75, 393 - offset, 60, 15))
@@ -92,12 +82,38 @@ class CCWelcomeViewController: UIViewController {
         libraryLabel.font = UIFont.systemFontOfSize(CCCoreUtil.fontSizeS)
         self.view!.addSubview(libraryLabel)
         
+        // Button Inset
+        let buttonPadding : CGFloat = -7.5
+        let inset = UIEdgeInsetsMake(buttonPadding, buttonPadding, buttonPadding, buttonPadding)
+
         //Settings
-        settingsButton = UIButton(frame: CGRectMake(0, 0, 40, 40))
-        settingsButton.setBackgroundImage(UIImage(named: "settings2.png"), forState: .Normal)
-        settingsButton.setBackgroundImage(UIImage(named: "settings2_highlight.png"), forState: .Highlighted)
-        settingsButton.addTarget(self, action: "openSettings", forControlEvents: .TouchUpInside)
+        settingsButton = UIButton()
+        settingsButton.setBackgroundImage(UIImage(named: "circleuser.png")!.imageWithAlignmentRectInsets(inset), forState: .Normal)
+        settingsButton.setBackgroundImage(UIImage(named: "circleuser_highlight.png")!.imageWithAlignmentRectInsets(inset), forState: .Highlighted)
+        settingsButton.addTarget(self, action: "openProfile", forControlEvents: .TouchUpInside)
         view!.addSubview(self.settingsButton)
+        
+        // Like button constraint
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addConstraint(NSLayoutConstraint(item: settingsButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 0))
+        
+        view.addConstraint(NSLayoutConstraint(item: settingsButton, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0))
+        
+        view.addConstraint(NSLayoutConstraint(item: settingsButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 40))
+        
+        view.addConstraint(NSLayoutConstraint(item: settingsButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 40))
+        
+
+        
+        //Placeholder for Fading
+        self.placeHolderImageView.frame = self.view.frame
+        if self.view.frame.size.height == 568 {
+            self.placeHolderImageView.image = UIImage(named: "LaunchImage_2x.png")
+        } else {
+            self.placeHolderImageView.image = UIImage(named: "LaunchImage_1x.png")
+        }
+        self.view!.addSubview(self.placeHolderImageView)
+
     }
 
     override func didReceiveMemoryWarning() {

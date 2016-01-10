@@ -19,13 +19,17 @@ import AssetsLibrary
     var currentIndex = 0
     
     let checkButton = UIButton()
+    
     let cancelButton = UIButton()
     let deleteButton  = UIButton()
     let flipButton = UIButton()
     let saveButton = UIButton()
+    let shareButton = UIButton()
 
     var delegate : UIViewController?
     var currentCell : CCBrowserCell?
+    
+    var category : CCCategory?
     
     // MARK: init
     convenience init(photos photosArray: NSMutableArray, currentIndex index: Int) {
@@ -76,26 +80,37 @@ import AssetsLibrary
             bgView.frame = CGRectMake(0, view.frame.size.height - 70, view.frame.size.width, 70)
             bgView.backgroundColor = UIColor.blackColor()
             view!.addSubview(bgView)
-            cancelButton.frame =  CGRectMake(15, view.frame.size.height - 65, 55, 55)
+            
+            cancelButton.frame =  CGRectMake(8, view.frame.size.height - 65, 55, 55)
             cancelButton.addTarget(self, action: "cancelAction", forControlEvents: .TouchUpInside)
             cancelButton.setBackgroundImage(UIImage(named: "close.png"), forState: .Normal)
             cancelButton.setBackgroundImage(UIImage(named: "close_highlight.png"), forState: .Highlighted)
             view!.addSubview(cancelButton)
-            deleteButton.frame = CGRectMake(view.frame.size.width - 70, view.frame.size.height - 60, 45, 45)
-            deleteButton.setBackgroundImage(UIImage(named: "delete.png"), forState: .Normal)
-            deleteButton.setBackgroundImage(UIImage(named: "delete_highlight.png"), forState: .Highlighted)
-            deleteButton.addTarget(self, action: "performDelete", forControlEvents: .TouchUpInside)
-            view!.addSubview(deleteButton)
-            flipButton.frame = CGRectMake(view.frame.size.width / 2 + 15, view.frame.size.height - 60, 45, 45)
-            flipButton.setBackgroundImage(UIImage(named: "flip2.png"), forState: .Normal)
-            flipButton.setBackgroundImage(UIImage(named: "flip2_highlight.png"), forState: .Highlighted)
-            flipButton.addTarget(self, action: "flipAction", forControlEvents: .TouchUpInside)
-            view!.addSubview(flipButton)
-            saveButton.frame = CGRectMake(view.frame.size.width / 2 - 60, view.frame.size.height - 60, 45, 45)
+            
+            saveButton.frame = CGRectMake(view.frame.size.width / 2 - 87, view.frame.size.height - 62, 50, 50)
             saveButton.setBackgroundImage(UIImage(named: "save2.png"), forState: .Normal)
             saveButton.setBackgroundImage(UIImage(named: "save2_highlight.png"), forState: .Highlighted)
             saveButton.addTarget(self, action: "saveAction", forControlEvents: .TouchUpInside)
             view!.addSubview(saveButton)
+            
+            shareButton.frame = CGRectMake(view.frame.size.width/2 - 22.5, view.frame.size.height - 60, 45, 45)
+            shareButton.setBackgroundImage(UIImage(named: "sendto.png"), forState: .Normal)
+            shareButton.setBackgroundImage(UIImage(named: "sendto_highlight.png"), forState: .Highlighted)
+            shareButton.addTarget(self, action: "shareAction", forControlEvents: .TouchUpInside)
+            view!.addSubview(shareButton)
+            
+            flipButton.frame = CGRectMake(view.frame.size.width / 2 + 40, view.frame.size.height - 59, 44, 44)
+            flipButton.setBackgroundImage(UIImage(named: "flip2.png"), forState: .Normal)
+            flipButton.setBackgroundImage(UIImage(named: "flip2_highlight.png"), forState: .Highlighted)
+            flipButton.addTarget(self, action: "flipAction", forControlEvents: .TouchUpInside)
+            view!.addSubview(flipButton)
+            
+            deleteButton.frame = CGRectMake(view.frame.size.width - 60, view.frame.size.height - 60, 45, 45)
+            deleteButton.setBackgroundImage(UIImage(named: "delete.png"), forState: .Normal)
+            deleteButton.setBackgroundImage(UIImage(named: "delete_highlight.png"), forState: .Highlighted)
+            deleteButton.addTarget(self, action: "deleteAction", forControlEvents: .TouchUpInside)
+            view!.addSubview(deleteButton)
+            
         }
         if (delegate is CCGalleryViewController) {
             let bg: UIView = UIView(frame: CGRectMake(0, view.frame.size.height - 50, view.frame.size.width, 50))
@@ -166,25 +181,26 @@ import AssetsLibrary
     }
     
     func flipAction() {
-//        var cell: CCBrowserCell = self.cellList[self.currentIndex]
-//        cell.flip()
         currentCell?.flip()
     }
-    
-    func performDelete() {
-//        var index: Int = self.currentIndex
-//        if index > self.photoDataSources.count - 1 {
-//            return
-//        }
-//        var path: String = "\(NSHomeDirectory())/Documents/Gallery/\(self.photoDataSources[index])"
-//        NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
-//        path = "\(NSHomeDirectory())/Documents/GalleryRef/\(self.photoDataSources[index])"
-//        NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
-//        self.photoDataSources.removeAtIndex(index)
-//        if index == self.photoDataSources.count {
-//            self.currentIndex--
-//        }
-//        self.browserCollectionView.reloadData()
+
+    func deleteAction() {
+        let index: Int = self.currentIndex
+        if index > photoDataSources!.count - 1 {
+            return
+        }
+        CCCoreUtil.removePhotoForCategory(CCCoreUtil.categories[0] as! CCCategory,
+            photo: photoDataSources![index] as! CCPhoto)
+
+        self.photoDataSources?.removeObjectAtIndex(index)
+        if index == self.photoDataSources!.count {
+            self.currentIndex--
+        }
+        self.browserCollectionView!.reloadData()
+    }
+
+    func shareAction() {
+        CCNetUtil.newPost(currentCell!.image)
     }
     
     //MARK: Controls

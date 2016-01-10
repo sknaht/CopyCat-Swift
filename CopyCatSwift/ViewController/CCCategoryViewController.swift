@@ -64,9 +64,13 @@ class CCCategoryViewController: UIViewController {
         //Scroll
         let width = self.view.frame.size.width
         let height = width * 0.45
-        self.scrollView = UIScrollView(frame: CGRectMake(0, 40, width, self.view.frame.size.height - 40))
-        self.scrollView.backgroundColor = UIColor.blackColor()
-        self.view!.addSubview(self.scrollView)
+        if scrollView.isDescendantOfView(self.view) {
+            scrollView.removeFromSuperview()
+        }
+        scrollView = UIScrollView(frame: CGRectMake(0, 40, width, self.view.frame.size.height - 40))
+        scrollView.backgroundColor = UIColor.blackColor()
+        self.view.addSubview(scrollView)
+
         
         for k in 0...list.count-2 {
             let category = list[k+1] as! CCCategory
@@ -95,11 +99,5 @@ class CCCategoryViewController: UIViewController {
         self.scrollView.contentSize = CGSizeMake(width, height * CGFloat(list.count))
         self.scrollView.scrollEnabled = true
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
 }

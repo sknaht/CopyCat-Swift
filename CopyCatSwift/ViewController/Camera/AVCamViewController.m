@@ -386,6 +386,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     CCPhotoBrowser *libVC=[[CCPhotoBrowser alloc]initWithPhotos:userCategory.photoList.array.mutableCopy currentIndex:[userCategory.photoList count]-1];
     libVC.delegate=self;
     libVC.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+    libVC.category = userCategory;
     [self presentViewController:libVC animated:YES completion:nil];
 }
 
@@ -536,18 +537,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
                             NSLog(@"Save to Camera Roll");
                         }
                         
-                        NSTimeInterval time=[[NSDate date] timeIntervalSince1970];
-                        NSString *path=[NSString stringWithFormat:@"%@/Documents/Gallery/%f.jpg",NSHomeDirectory(),time];
-                        NSData *imgData = UIImageJPEGRepresentation(newImage,0.8);
-                        [imgData writeToFile:path atomically:YES];
-                        
-                        path=[NSString stringWithFormat:@"%@/Documents/GalleryRef/%f.jpg",NSHomeDirectory(),time];
-                        imgData = UIImageJPEGRepresentation(overlayView.image,0.8);
-                        [imgData writeToFile:path atomically:YES];
-                        
-                        path=[NSString stringWithFormat:@"%@/Documents/tm/Gallery/%f.jpg",NSHomeDirectory(),time];
-                        imgData = UIImageJPEGRepresentation(tmImage,0.8);
-                        [imgData writeToFile:path atomically:YES];
+                        [CCCoreUtil addUserPhoto:image refImage:overlayView.image];
                         
 
                         NSLog(@"Saved");

@@ -21,11 +21,6 @@ class CCProfileViewController: UIViewController {
     //Delete
     private var settingsButton = UIButton()
 
-    convenience init(category : CCCategory){
-        self.init()
-        self.category = category
-    }
-    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
@@ -90,24 +85,25 @@ class CCProfileViewController: UIViewController {
         view!.addSubview(imageView)
 
         // User Info
-        let labelHeight : CGFloat = 6
+        let labelHeight : CGFloat = 11
+        let offset : CGFloat = -2
         
-        let likes = UILabel(frame:  CGRectMake(0, 40 + 2 * lineWidth + height/2 - labelHeight, view.frame.size.width/2 - lineWidth, labelHeight))
+        let likes = UILabel(frame:  CGRectMake(0, 40 + 2 * lineWidth + height/2 - labelHeight + offset, view.frame.size.width/2 - lineWidth, labelHeight))
         likes.text = "0"
         likes.textColor = .whiteColor()
         view.addSubview(likes)
         
-        let likesLabel = UILabel(frame:  CGRectMake(0, 40 + 2 * lineWidth + height/2 + labelHeight, view.frame.size.width/2 - lineWidth, labelHeight))
+        let likesLabel = UILabel(frame:  CGRectMake(0, 40 + 2 * lineWidth + height/2 + labelHeight + offset, view.frame.size.width/2 - lineWidth, labelHeight))
         likesLabel.text = "Likes"
         likesLabel.textColor = .whiteColor()
         view.addSubview(likesLabel)
 
-        let pins = UILabel(frame:  CGRectMake(0, 40 + 2 * lineWidth + height/2 - labelHeight, view.frame.size.width/2 - lineWidth, labelHeight))
+        let pins = UILabel(frame:  CGRectMake(view.frame.size.width/2 + lineWidth, 40 + 2 * lineWidth + height/2 - labelHeight + offset, view.frame.size.width/2 - lineWidth, labelHeight))
         pins.text = "0"
         pins.textColor = .whiteColor()
         view.addSubview(pins)
         
-        let pinsLabel = UILabel(frame:  CGRectMake(view.frame.size.width/2 + lineWidth, 40 + 2 * lineWidth + height/2 + labelHeight, view.frame.size.width/2 - lineWidth, labelHeight))
+        let pinsLabel = UILabel(frame:  CGRectMake(view.frame.size.width/2 + lineWidth, 40 + 2 * lineWidth + height/2 + labelHeight + offset, view.frame.size.width/2 - lineWidth, labelHeight))
         pinsLabel.text = "Pins"
         pinsLabel.textColor = .whiteColor()
         view.addSubview(pinsLabel)
@@ -152,6 +148,10 @@ class CCProfileViewController: UIViewController {
         deleteButton.alpha = 0
     }
     
+    override func viewWillAppear(animated: Bool) {
+        category = CCCoreUtil.categories[0] as? CCCategory
+        collectionView?.reloadData()
+    }
     
     // MARK: Delete
     func prepareDelete() {
@@ -227,8 +227,9 @@ extension CCProfileViewController:UICollectionViewDataSource{
 extension CCProfileViewController:UICollectionViewDelegate{
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if !self.deleting{
-            let browser = CCPhotoBrowser(photos: ((category?.mutableOrderedSetValueForKey("photoList").array)! as NSArray).mutableCopy() as! NSMutableArray, currentIndex: indexPath.row) //difference
+            let browser = CCPhotoBrowser(photos: ((category?.mutableOrderedSetValueForKey("photoList").array)! as NSArray).mutableCopy() as! NSMutableArray, currentIndex: indexPath.row) //difference : without "-1"
             browser.delegate = self
+            browser.category = category
             browser.modalTransitionStyle = .CrossDissolve
             self.presentViewController(browser, animated: false, completion: { _ in })
         } else {

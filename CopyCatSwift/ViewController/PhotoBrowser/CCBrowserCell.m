@@ -61,21 +61,15 @@
     self.imagePath=imagePath;
 
     if (self.isRef){
-        NSString *path=[NSString stringWithFormat:@"%@/Documents/GalleryRef/%@",NSHomeDirectory(),imagePath];
+        NSString *path=[NSString stringWithFormat:@"%@/Documents/%@_ref.jpg",NSHomeDirectory(),imagePath];
         self.image=[UIImage imageWithContentsOfFile:path];
     } else{
-        NSString *path=[NSString stringWithFormat:@"%@/Documents/Gallery/%@",NSHomeDirectory(),imagePath];
+        NSString *path=[NSString stringWithFormat:@"%@/Documents/%@.jpg",NSHomeDirectory(),imagePath];
         self.image=[UIImage imageWithContentsOfFile:path];
-        if (!self.image){
-            path=[NSString stringWithFormat:@"%@/Documents/%@.jpg",NSHomeDirectory(),imagePath];
-            self.image=[UIImage imageWithContentsOfFile:path];
-        }
         if (!self.image)
             self.image=[UIImage imageNamed:imagePath];
     }
     self.photoBrowser.currentCell=self;
-    
-//    NSLog(@"%@\n%@",self.photoBrowser.currentImage,self.image);
     
     CGRect photoImageViewFrame;
     photoImageViewFrame.origin = CGPointZero;

@@ -240,6 +240,7 @@ extension CCGalleryViewController:UICollectionViewDelegate{
             } else {
                 let browser = CCPhotoBrowser(photos: ((category?.mutableOrderedSetValueForKey("photoList").array)! as NSArray).mutableCopy() as! NSMutableArray, currentIndex: indexPath.row - 1)
                 browser.delegate = self
+                browser.category = category
                 browser.modalTransitionStyle = .CrossDissolve
                 self.presentViewController(browser, animated: false, completion: { _ in })
             }

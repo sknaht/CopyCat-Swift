@@ -6,7 +6,6 @@
 //  Copyright © 2015 Baiqi Zhang. All rights reserved.
 //
 
-import UIKit
 import CoreData
 
 @objc class CCCoreUtil:NSObject{
