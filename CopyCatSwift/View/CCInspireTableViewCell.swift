@@ -10,14 +10,12 @@ import UIKit
 
 class CCInspireTableViewCell : UITableViewCell {
     // Image
-    let myImageView = UIImageView()
     private var count = 0
+    let myImageView = UIImageView()
     var myImageURI : String{
         set{
-//            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-//                self.myImageView.image = nil
-//                self.myImageView.alpha = 0
-//            }
+            self.myImageView.image = nil
+            self.myImageView.alpha = 0
             count++
             myImageView.frame=CGRectMake(0,0, self.frame.size.width, self.frame.size.height - 40);
             myImageView.contentMode = .ScaleAspectFill
@@ -27,7 +25,6 @@ class CCInspireTableViewCell : UITableViewCell {
                 if let image = UIImage(named: newValue){
                     self.myImageView.image = image
                 } else {
-//                    self.myImageView.downloadedFrom(link: newValue)
                     guard
                         let url = NSURL(string: newValue)
                         else {return}
@@ -61,16 +58,48 @@ class CCInspireTableViewCell : UITableViewCell {
     private let usernameLabel = UILabel()
     var username : String{
         set{
-            usernameLabel.frame=CGRectMake(40,self.frame.size.height - 40, self.frame.size.width, 40)
+            usernameLabel.frame=CGRectMake(40,self.frame.size.height - 35, self.frame.size.width, 15)
             usernameLabel.text = newValue
             usernameLabel.textColor = .whiteColor()
+            usernameLabel.font = UIFont.systemFontOfSize(10.5)
             usernameLabel.textAlignment = .Left
         }
         get{
             return self.username
         }
     }
+    
+    
+    // Timestamp
+    private let timestampLabel = UILabel()
+    var timestamp : NSDate{
+        set{
+            let now = Int(NSDate().timeIntervalSinceDate(newValue))
+            
+            timestampLabel.frame=CGRectMake(40,self.frame.size.height - 20, self.frame.size.width, 15)
+            
+            if now<60{
+                timestampLabel.text = String(now) + "s ago"
+            } else if now < 60*60{
+                timestampLabel.text = String(now/60) + "m ago"
+            } else if now < 60*60*24{
+                timestampLabel.text = String(now/60/60) + "h ago"
+            } else if now < 60*60*24/365{
+                timestampLabel.text = String(now/60/60/24) + "days ago"
+            } else {
+                timestampLabel.text = String(now/60/60/24/365/12) + "months ago"
+            }
+            
+            timestampLabel.textColor = UIColor(colorLiteralRed: 1, green: 1, blue: 1, alpha: 0.75)
+            timestampLabel.textAlignment = .Left
+            timestampLabel.font = UIFont.systemFontOfSize(10.5)
+        }
+        get{
+            return self.timestamp
+        }
+    }
 
+    // Counts
     private let likeCountLabel = UILabel()
     var likeCount : Int{
         set{
@@ -105,7 +134,8 @@ class CCInspireTableViewCell : UITableViewCell {
         myImageView.alpha = 0.0
         self.addSubview(usernameLabel)
         self.addSubview(myImageView)
-
+        self.addSubview(timestampLabel)
+        
         // User ImageView
         let padding : CGFloat = -7.0
         let image = UIImage(named: "AppIcon.png")?.imageWithAlignmentRectInsets(UIEdgeInsetsMake(padding, padding, padding, padding))
@@ -167,7 +197,7 @@ class CCInspireTableViewCell : UITableViewCell {
 
         // Pin button constraint
         pinButton.translatesAutoresizingMaskIntoConstraints = false
-        addConstraint(NSLayoutConstraint(item: pinButton, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: likeButton, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: -40))
+        addConstraint(NSLayoutConstraint(item: pinButton, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: likeButton, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: -30))
         
         addConstraint(NSLayoutConstraint(item: pinButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0))
         
@@ -175,8 +205,8 @@ class CCInspireTableViewCell : UITableViewCell {
         
         addConstraint(NSLayoutConstraint(item: pinButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 40))
         
-        // Like Count Label constraint
-        likeCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        // Pin Count Label constraint
+        pinCountLabel.translatesAutoresizingMaskIntoConstraints = false
         addConstraint(NSLayoutConstraint(item: pinCountLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: pinButton, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0))
         
         addConstraint(NSLayoutConstraint(item: pinCountLabel, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0))

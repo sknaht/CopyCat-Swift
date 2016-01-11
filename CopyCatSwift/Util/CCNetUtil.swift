@@ -24,16 +24,20 @@ import CoreData
                 let post = NSManagedObject.init(entity: postEntity!, insertIntoManagedObjectContext: nil) as! CCPost
                 
                 post.photoURI = uri
-                post.likeCount = subJson["likeCount"].int ?? 0
-                post.pinCount = subJson["likeCount"].int ?? 0
-                post.photoWidth = subJson["photoWidth"].int ?? 0
-                post.photoHeight = subJson["photoHeight"].int ?? 0
+                post.photoWidth = subJson["photoWidth"].int
+                post.photoHeight = subJson["photoHeight"].int
                 
-                let date = subJson["timestamp"].string ?? ""
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"//this your string date format
-                dateFormatter.timeZone = NSTimeZone(name: "UTC")
-                post.timestamp = dateFormatter.dateFromString(date)
+                post.pinCount = subJson["pinCount"].int
+                post.likeCount = subJson["likeCount"].int
+                
+                if let date = subJson["timestamp"].string {
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"//this your string date format
+                    dateFormatter.timeZone = NSTimeZone(name: "UTC")
+                    post.timestamp = dateFormatter.dateFromString(date)
+                } else {
+                    post.timestamp = NSDate()
+                }
                 
                 result.append(post)
             }
@@ -44,27 +48,6 @@ import CoreData
     
     static func getFeedForCurrentUser(completion:(posts:[CCPost]) -> Void) -> Void{
         CCNetUtil.getJSONFromURL(host+"/api/post") { (json:JSON) -> Void in
-//            var result = [CCPost]()
-//            for (_, subJson) in json {
-//                if let uri = subJson["photoURI"].string {
-//                    let postEntity = NSEntityDescription.entityForName("Post", inManagedObjectContext: CCCoreUtil.managedObjectContext)
-//                    let post = NSManagedObject.init(entity: postEntity!, insertIntoManagedObjectContext: nil) as! CCPost
-//                    
-//                    post.photoURI = uri
-//                    post.likeCount = subJson["likeCount"].int ?? 0
-//                    post.pinCount = subJson["likeCount"].int ?? 0
-//                    post.photoWidth = subJson["photoWidth"].int ?? 0
-//                    post.photoHeight = subJson["photoHeight"].int ?? 0
-//                    
-//                    let date = subJson["timestamp"].string ?? ""
-//                    let dateFormatter = NSDateFormatter()
-//                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"//this your string date format
-//                    dateFormatter.timeZone = NSTimeZone(name: "UTC")
-//                    post.timestamp = dateFormatter.dateFromString(date)
-//                    
-//                    result.append(post)
-//                }
-//            }
             let result = parsePostFromJson(json)
             completion(posts: result)
         }

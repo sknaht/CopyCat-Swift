@@ -27,14 +27,19 @@ class CCInspireTableViewController : SKStatefulTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell"/*+String(indexPath.row % 5)*/, forIndexPath: indexPath) as! CCInspireTableViewCell
         
-        let uri = CCNetUtil.host + postList[indexPath.row].photoURI!
+        let post = postList[indexPath.row]
         
-        cell.myImageView.image = nil
-        cell.myImageView.alpha = 0
-
+        let uri = CCNetUtil.host + post.photoURI!
+        
         cell.username = "Anonymous"
         cell.delegate = self
         cell.myImageURI = uri
+        
+        cell.pinCount = post.pinCount?.integerValue ?? 0
+        cell.likeCount = post.likeCount?.integerValue ?? 0
+        
+        cell.timestamp = post.timestamp!
+        
         return cell
     }
     

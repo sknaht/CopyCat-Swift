@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E73E3D81F3747F9E51E1764AA2CCE77248F92F4D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "97D10F9661371C7FF23500B8A2FBFD87E7DADCDD" : 0,
+    "E73E3D81F3747F9E51E1764AA2CCE77248F92F4D" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0842E0DD-8259-4A3F-80EC-78B8C5349987",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "97D10F9661371C7FF23500B8A2FBFD87E7DADCDD" : "CopyCat\/",
+    "E73E3D81F3747F9E51E1764AA2CCE77248F92F4D" : "CopyCatSwift\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CopyCatSwift",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CopyCatSwift.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/code.jd.com\/zeratul1992\/CopyCat.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "97D10F9661371C7FF23500B8A2FBFD87E7DADCDD"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/baiqizhang\/CopyCat-Swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E73E3D81F3747F9E51E1764AA2CCE77248F92F4D"
+    }
+  ]
+}

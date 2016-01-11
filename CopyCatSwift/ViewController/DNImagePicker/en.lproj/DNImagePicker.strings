@@ -1,0 +1,16 @@
+/* 
+  DNImagePicker.strings
+  ImagePicker
+
+  Created by DingXiao on 15/3/4.
+  Copyright (c) 2015年 Dennis. All rights reserved.
+*/
+"albumTitle" = "Photos";
+"cancel" = "Cancel";
+"send" = "Confirm";
+"preview" = "Preview";
+"fullImage" = "No compression";
+"alertTitle" = "Tips";
+"alertContent" = "Can not select more than 100 photos in one run";
+"alertButton" = "OK";
+"UnAuthorizedTip" = "Please allow CopyCat to access your album in \"Settings\"->\"Privacy\"->\"Photos\"";

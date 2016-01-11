@@ -20,17 +20,17 @@ class CCAlertViewController : UIViewController {
         
         let background = UIButton(frame: view.frame)
         background.backgroundColor = .blackColor()
-        background.alpha = 0.5
+        background.alpha = 0.75
         background.addTarget(self, action: "closeAction", forControlEvents: .AllTouchEvents)
         view.addSubview(background)
         
-        tableView.backgroundColor = .blackColor()
-        tableView.separatorStyle = .None
+//        tableView.backgroundColor = .blackColor()
+//        tableView.separatorStyle = .None
         view.addSubview(tableView)
         
-        tableView.registerClass(CCInspireTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.allowsSelection = false
-
+        tableView.dataSource = self
         
         // User Image constraint
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,10 +38,21 @@ class CCAlertViewController : UIViewController {
         
         self.view.addConstraint(NSLayoutConstraint(item: tableView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
-        self.view.addConstraint(NSLayoutConstraint(item: tableView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: view.frame.width/2))
+        self.view.addConstraint(NSLayoutConstraint(item: tableView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: view.frame.width/3*2))
         
         self.view.addConstraint(NSLayoutConstraint(item: tableView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: view.frame.height/2))
     }
-    
-    
+}
+
+// MARK: UICollectionViewDelegateFlowLayout
+
+extension CCAlertViewController:UITableViewDataSource{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return CCCoreUtil.categories.count - 1
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        cell.textLabel?.text = CCCoreUtil.categories[indexPath.row+1].name
+        return cell
+    }
 }

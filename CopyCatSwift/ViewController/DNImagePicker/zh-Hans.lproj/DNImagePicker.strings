@@ -1,0 +1,16 @@
+/* 
+  DNImagePicker.strings
+  ImagePicker
+
+  Created by DingXiao on 15/3/4.
+  Copyright (c) 2015年 Dennis. All rights reserved.
+*/
+"albumTitle" = "照片";
+"cancel" = "取消";
+"send" = "选择";
+"preview" = "预览";
+"fullImage" = "不进行压缩";
+"alertTitle" = "提示";
+"alertContent" = "不能一次选择超过100张图片";
+"alertButton" = "确定";
+"UnAuthorizedTip" = "请在iPhone的\"设置-隐私-照片\"选项中，\n允许CopyCat访问你的手机相册";
